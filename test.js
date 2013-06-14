@@ -27,8 +27,13 @@ window.col.test = new (function _test () {
 						group.errors.push(group.tests.splice(t))
 					}
 				}
+				return group.tests;
 			}
 		}
+	};
+	
+	test.log = function _log (tests) {
+		
 	};
 })();
 // Require col object
