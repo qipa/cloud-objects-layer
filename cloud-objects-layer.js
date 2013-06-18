@@ -51,14 +51,15 @@ function include (uri, callback) {
 };
 
 /* 3	*/
-var where = "cloud-objects-layer";	// Probably here
-if (typeof col !== "undefined") {
-	if (typeof col.root === "string" && col.root !== "")
-		where = col.root + "/" + where;
-	if (typeof col.dirname === "string")
-		where = col.root?(col.root+"/"):""+ col.dirname;
+
+var where ="";
+if (col) {
+	if (col.root && col.root !== "")
+		where = col.root;
+	if (col.dirname && col.dirname !== "")
+		where = (where !== "" ? where + "/":"") + col.dirname;
 }
 // Include col.js and wait for completion...
-include(where?where+"/":""+"col.js", function yay () {alert("Yay! ur a dipshit");});
+include((where?where+"/":"")+"col.js", function yay () {alert("Yay! ur a dipshit");});
 
 })(window);
