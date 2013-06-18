@@ -20,21 +20,27 @@ window.col.test = new (function _test () {
 						group.tests[t] = group.tests[t]();		// Do the test.
 						group.tests[t] = (group.tests[t] === group.result);	// Pass or fail
 					}
-					else {
+					else { // In the tests list, but who knows why or what
 						group.tests[t] = test.error;
 						if (!group.errors)
 							group.errors = new Array();
 						group.errors.push(group.tests.splice(t))
 					}
 				}
-				return group.tests;
+				test.log(group);
+				return group;
 			}
 		}
 	};
+	var log = new Array();
 	
-	test.log = function _log (tests) {
+	test.log = function _log (group) {
+		log.push(group);
+		var x = document.getElementById("inPageTestResults");
 		
 	};
+	
+	
 })();
 // Require col object
 } else throw "!";

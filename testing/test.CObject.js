@@ -4,9 +4,10 @@ with (col) {
 	
 	var results = test.run({
 		on:subject,
-		test:function () {
+		description:"CObject is an ECMA Object",
+		tests:[function () {
 			return (this.on instanceof Object);
-		},
+		}],
 		result:true
 	});
 	
