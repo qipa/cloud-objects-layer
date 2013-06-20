@@ -50,6 +50,10 @@ window.col.CObject = function _CObject () {
 			} else col.COError("There is no state [to delete] named '"+arguments[i]+"' on this Cloud Object.");
 		};
 	})();
+	
+	try {new CLOUD_OBJECT_STRUCTURE_ONLY;} catch (error) {
+		
+	}
 };
 
 // Require col object

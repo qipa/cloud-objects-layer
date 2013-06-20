@@ -1,7 +1,8 @@
-// Require col object
-if (window && window.col) {
+
+
+window.onload = function () {
 	
-window.col.test = new (function _test () {
+test = new (function _test () {
 	var test = this;
 	
 	test.error = new (function _badtest () {var error = this; error.toString = function () {return "this test could not be performed";};} )();
@@ -37,10 +38,22 @@ window.col.test = new (function _test () {
 	test.log = function _log (group) {
 		log.push(group);
 		var x = document.getElementById("inPageTestResults");
-		
+		var y = document.createElement("DIV");
+		y.innerText = group.tests.toString();
+		x.appendChild(y);
 	};
 	
+	for (var item in col) {
+		try {
+			col.include("test."+item+".js");
+		}
+		catch (e) {
+			
+		}
+	}
 	
 })();
-// Require col object
-} else throw "!";
+
+
+}
+
