@@ -39,16 +39,17 @@ new (function _cloudObjectsLayer (window) {
 
 /* 2	*/
 // A simple function that inserts a script into the page head and executes a function on its completion
-	closure.include = function _include (uri, callback) {
+	closure.include = function _include (uri, callback, errback) {
 		
 		// <script ... >
 		var insertion = document.createElement("SCRIPT");
 		insertion.setAttribute("language", "javascript");
 		insertion.setAttribute("type", "text/javascript");
 		insertion.setAttribute("src", uri);
+		insertion.onerror = errback;
 		
 		function imdone () {
-			if (typeof callback === "function")	callback();
+			if (typeof callback === "function")	callback(uri);
 		};
 		
 		// Map this callback into Internet Exploder
