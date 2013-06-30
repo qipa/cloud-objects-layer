@@ -1,4 +1,3 @@
-
 // Require col object
 if (window && window.col) {
 
@@ -15,6 +14,16 @@ window.col.CObject = function _CObject () {
 		var states = this;
 		var current = null;
 		
+		var listeners = {};
+		
+		// State 'name' exists?
+		states.hasState = function _hasState (name) {
+			if (typeof states[name] !== "undefined" && states[name] instanceof CObject.State) {
+				return true;
+			}
+			else return false;
+		};
+		
 		// As long as myCloudObject.states.StateName isn't defined, create a state
 		states.add = function _add (name) {
 			for (var i = 0; arguments[i]; i++) {
@@ -30,7 +39,7 @@ window.col.CObject = function _CObject () {
 		};
 		
 		states.select = function _select (name) {
-			if (typeof states[name] !== "undefined" && states[name] instanceof CObject.State) {
+			if (states.hasState(name)) {
 				current = states[name];
 				return true;
 			}
@@ -38,16 +47,41 @@ window.col.CObject = function _CObject () {
 		};
 		
 		states.remove = function _remove (name, switchTo) {
-			if (typeof states[name] !== "undefined" && states[name] instanceof CObject.State) {
+			if (states.hasState(name)) {
 				if (current === states[name]) {
 					if (switchTo) switchTo = states.select(switchTo);
-					if (!sitchTo) {
+					if (!switchTo) {
 						// TODO: decide  a fault path for removing states etc.
 					}
 				}
 				delete states[name];
 				return true;
 			} else col.COError("There is no state [to delete] named '"+arguments[i]+"' on this Cloud Object.");
+		};
+		
+		states.addListener = function _addListener (state, onState) {
+			if (states.hasState(state)) {
+				if (!listeners[state]) listeners[state] = new Array();
+				
+				if (typeof onState === "function") {
+					listeners[state].push(onState);
+					return onState;
+				}
+			}
+		};
+		
+		
+		states.removeListener = function _removeListener (state, onState) {
+			if (state) {
+				if (typeof onState === "function") {
+					for (var l = 0; listeners[state][l]; l ++) {
+						if (listeners[state][l] === onState) listeners[state].slice(l);
+					}
+				}
+			}
+			else {
+				
+			}
 		};
 	})();
 	
