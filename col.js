@@ -14,13 +14,16 @@ function start (window, closure) {
 			throw ("ABSTRACT");
 	};
 	
-	// Invoke CObject constructor
-	col.CObject.call(this);
+	
 		
 	
 	with (closure) {
 		include(prefix+"CObject.js", function () {
+			// Invoke CObject constructor
+			col.CObject.call(this);
 			col.prototype = new col.CObject(CLOUD_OBJECT_STRUCTURE_ONLY);
+			
+			include(prefix+"client/Addon.js")
 		});
 	}
 	
