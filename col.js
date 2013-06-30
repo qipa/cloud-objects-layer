@@ -1,4 +1,3 @@
-
 function start (window, closure) {
 	window.col = closure;
 	
@@ -14,7 +13,9 @@ function start (window, closure) {
 		if (arguments.callee.caller.arguments[0] === _CLOUD_OBJECT_STRUCTURE_ONLY)
 			throw ("ABSTRACT");
 	};
-		
+	
+	// Invoke CObject constructor
+	col.CObject.call(this);
 		
 	
 	with (closure) {
