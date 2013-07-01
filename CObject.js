@@ -8,6 +8,7 @@ window.col.CObject = function _CObject () {
 		if (!this instanceof _State)	return col.COError();
 		var State = this;
 		
+		State.getName = function _getName () { return name; };
 	};
 	
 	CObject.states = new (function _state_mgmt () {
@@ -16,6 +17,14 @@ window.col.CObject = function _CObject () {
 		
 		var listeners = {};
 		
+		function handleState () {
+			var st = current.getName();
+			if (listeners[st]) {
+				for (var i = 0; listeners[st][i]; i ++) {
+					listeners[st][i]();
+				}
+			}
+		};
 		// State 'name' exists?
 		states.hasState = function _hasState (name) {
 			if (typeof states[name] !== "undefined" && states[name] instanceof CObject.State) {
@@ -41,6 +50,7 @@ window.col.CObject = function _CObject () {
 		states.select = function _select (name) {
 			if (states.hasState(name)) {
 				current = states[name];
+				handleState();
 				return true;
 			}
 			else return col.COError("There is no state named '"+arguments[i]+"' on this Cloud Object.");
@@ -68,6 +78,7 @@ window.col.CObject = function _CObject () {
 					return onState;
 				}
 			}
+			else return false;
 		};
 		
 		
@@ -77,11 +88,14 @@ window.col.CObject = function _CObject () {
 					for (var l = 0; listeners[state][l]; l ++) {
 						if (listeners[state][l] === onState) listeners[state].slice(l);
 					}
+					return true;
+				}
+				else {
+					delete listeners[state];
+					return true;
 				}
 			}
-			else {
-				
-			}
+			return false;
 		};
 	})();
 	
