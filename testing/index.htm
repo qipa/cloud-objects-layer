@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>cloud-objects-layer Tests</title>
+
+<!-- Not doing this would imply that col.root be set to "cloud-objects-layer" -->
+<!--  (ie: this lib is in a folder in ur sites sub directory) -->
+<script language="javascript" type="text/javascript">
+    col = { root:"..", dirname:"" };
+</script>
+
+<!-- The ideal only inclusion line for cloud-objects-layer -->
+<script language="javascript" type="text/javascript" src="../cloud-objects-layer.js"></script>
+
+<!--  The test script -->
+<script language="javascript" type="text/javascript" src="test.js"></script>
+
+<style>
+	body {
+		font-family:'Sans-Serif';
+	}
+	div.test {
+		border-width:1px;
+		border-style:solid;
+		font-size:10pt;
+		margin:5px;
+		padding:5px;
+		position:static;
+	}
+	div.test div.headline {
+		font-size:14pt;
+		
+	}
+	div.test div.details {
+		font-size:12pt;
+	}
+
+	div.test div.toggle {
+		font-size:13pt;
+		padding:15px;
+		position:static;
+	}
+	div.passed {
+		border-color:#004400;
+		background-color:#AAFFAA;
+	}
+	div.failed {
+		border-color:#440000;
+		background-color:#FFAAAA;
+	}
+</style>
+</head>
+
+<body>
+<h1>Cloud Objects Layer Tests</h1>
+<div id="inPageTestResults"></div>
+
+</body>
+
+</html>

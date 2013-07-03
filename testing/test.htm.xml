@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page>
+	
+	<resources>
+		
+	</resources>
+	
+	<title>The Cloud Objects Layer Diagnostics</title>
+	<body>
+		<div><textresource id="introduction" /></div>
+		<CPanel name="pnTesting">
+		
+		</CPanel>
+	</body>
+</page>
