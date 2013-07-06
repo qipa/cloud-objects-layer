@@ -15,7 +15,15 @@ function start (window, closure) {
 	};
 	
 	
+	var lastDirIndex = window.location.pathname.lastIndexOf("/");
+	if (lastDirIndex > (-1) ) {
+		var filename = window.location.pathname.substr(lastDirIndex+1);
+		if (filename === "") {
 		
+		}
+
+	}
+	
 	
 	with (closure) {
 		include(prefix+"CObject.js", function () {

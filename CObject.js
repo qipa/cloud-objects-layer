@@ -83,20 +83,27 @@ window.col.CObject = function _CObject () {
 		
 		
 		states.removeListener = function _removeListener (state, onState) {
-			if (state) {
-				if (typeof onState === "function") {
+			if (state && states.hasState(state)) {
+				if (onState && typeof onState === "function") {
+					var removed = false;
 					for (var l = 0; listeners[state][l]; l ++) {
-						if (listeners[state][l] === onState) listeners[state].slice(l);
+						if (listeners[state][l] === onState) {
+							listeners[state].slice(l);
+							removed = true;
+						}
 					}
-					return true;
+					if (removed) return true;
+					else return false;
 				}
-				else {
+				else if (!onState) {
 					delete listeners[state];
 					return true;
 				}
+				else return false;
 			}
 			return false;
 		};
+		
 	})();
 	
 	try {new CLOUD_OBJECT_STRUCTURE_ONLY;} catch (error) {

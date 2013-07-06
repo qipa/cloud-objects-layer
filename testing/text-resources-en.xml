@@ -2,6 +2,6 @@
 
 <resources>
 	<textresource id="introduction">
-		
+		This page tests and collects resources on your specific version of <b>cloud-objects-layer</b>.  To submit bugs, or issues, please (after being sure) refer to the public repo at <a href="https://github.com/GUSCRAWFORD/cloud-objects-layer">github.com/GUSCRAWFORD/cloud-objects-layer</a>.
 	</textresource>
 </resources>

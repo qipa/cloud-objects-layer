@@ -67,8 +67,34 @@ new (function _cloudObjectsLayer (window) {
 		//   + <script>   <---- put
 		document.head.appendChild(insertion);
 	};
-
-
+	
+	closure.createURIQuery = function _createURIQuery (json) {
+		var qstr = "?";
+		for (var k in json) {
+			if (qstr !== "?") qstr +="&";
+			qstr += k + "=" +uriEncode(json[k]);
+		}
+	};
+	
+	closure.getData = function _getData (uri, async, callback, errback) {
+		if (window.XMLHttpRequest) {
+			var xmlhttp = new XMLHttpRequest();
+		}
+		else {// code for IE6, IE5
+			var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		if (async) {
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					callback(xmlhttp);
+    			}
+ 			};
+		}
+		xmlhttp.open("GET", uri , async);
+		xmlhttp.send();
+		if (!async) callback(xmlhttp);
+		return true;
+	};
 
 /* 4	*/
 /*
