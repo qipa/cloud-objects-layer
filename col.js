@@ -18,9 +18,16 @@ function start (window, closure) {
 	var lastDirIndex = window.location.pathname.lastIndexOf("/");
 	if (lastDirIndex > (-1) ) {
 		var filename = window.location.pathname.substr(lastDirIndex+1);
-		if (filename === "") {
+		if (filename === "") filename = "default";
 		
-		}
+		col.getData(filename+".xml", false,
+			function ondone (xhr) {
+				
+			},
+			function onerr (ehr) {
+				
+			}
+		);
 
 	}
 	
